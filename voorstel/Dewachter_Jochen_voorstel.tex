@@ -1,0 +1,114 @@
+%==============================================================================
+% Sjabloon onderzoeksvoorstel bachelorproef
+%==============================================================================
+% Gebaseerd op LaTeX-sjabloon ‘Stylish Article’ (zie voorstel.cls)
+% Auteur: Jens Buysse, Bert Van Vreckem
+%
+% Compileren in TeXstudio:
+%
+% - Zorg dat Biber de bibliografie compileert (en niet Biblatex)
+%   Options > Configure > Build > Default Bibliography Tool: "txs:///biber"
+% - F5 om te compileren en het resultaat te bekijken.
+% - Als de bibliografie niet zichtbaar is, probeer dan F5 - F8 - F5
+%   Met F8 compileer je de bibliografie apart.
+%
+% Als je JabRef gebruikt voor het bijhouden van de bibliografie, zorg dan
+% dat je in ``biblatex''-modus opslaat: File > Switch to BibLaTeX mode.
+
+\documentclass{voorstel}
+
+\usepackage{lipsum}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+%------------------------------------------------------------------------------
+% Metadata over het voorstel
+%------------------------------------------------------------------------------
+
+%---------- Titel & auteur ----------------------------------------------------
+
+% TODO: geef werktitel van je eigen voorstel op
+\PaperTitle{De invloed van quantum computing op de industrie}
+\PaperType{Onderzoeksvoorstel Bachelorproef 2019-2020} % Type document
+
+% TODO: vul je eigen naam in als auteur, geef ook je emailadres mee!
+\Authors{Jochen Dewachter\textsuperscript{1}} % Authors
+\CoPromotor{xyz\textsuperscript{2}}
+\affiliation{\textbf{Contact:}
+  \textsuperscript{1} \href{mailto:jochen.dewachter@student.hogent.be}{jochen.dewachter@student.hogent.be};
+  \textsuperscript{2} \href{mailto:xyz@xyz.com}{xyz@xyz.com};
+}
+
+%---------- Abstract ----------------------------------------------------------
+
+\Abstract{
+  Dat de wereld steeds slimmer wordt kan men niet meer ontkennen, denk maar aan Artificial Intelligence en Machine Learning bijvoorbeeld.
+  Desondanks deze ingewikkelde technologiën zijn er nog steeds problemen waar de klassieke computer geen weet mee is.
+  Ondertussen zijn er ook hiervoor oplossingen gevonden: Quantum computers.
+  Ook al zit quantum computing nog in zijn babyjaren, zijn grote bedrijven hier meer en meer mee bezig.
+  In dit onderzoek wordt er gekeken naar de invloed hiervan. Er wordt zowel naar de positieve impact op de industrie gekeken als naar de negatieve kanten.
+  Dit wordt gedaan aan de hand van enkele van de belangrijkste problemen die men momenteel niet efficiënt kan oplossen op een klassieke computer of zelf op een supercomputer.
+  Er wordt wordt een vergelijking gedaan tussen:
+  \begin{itemize}
+    \item De tijdscomplexiteit.
+    \item De ruimtecomplexiteit.
+    \item De invloed van extra parameters op tijdscomplexiteit.
+  \end{itemize}
+  Deze vergelijking is steeds tussen hetzelfde algoritme in een klassieke computer en een quantumcomputer.
+  Naast de karakteristieken van quantumcomputer wordt er ook nog onderzocht of de belangrijkste bedrijfprocessen van tegenwoordig weldegelijk efficiënter uitgevoerd kunnen worden.
+  Dit onderzoek zal de positieve invloed van quantum computing op de industrie weergeven, maar ook de negatieve effecten zodanig dat men in de toekomst hierop kan anticiperen.
+}
+
+%---------- Onderzoeksdomein en sleutelwoorden --------------------------------
+% TODO: Sleutelwoorden:
+%
+% Het eerste sleutelwoord beschrijft het onderzoeksdomein. Je kan kiezen uit
+% deze lijst:
+%
+% - Mobiele applicatieontwikkeling
+% - Webapplicatieontwikkeling
+% - Applicatieontwikkeling (andere)
+% - Systeembeheer
+% - Netwerkbeheer
+% - Mainframe
+% - E-business
+% - Databanken en big data
+% - Machineleertechnieken en kunstmatige intelligentie
+% - Andere (specifieer)
+%
+% De andere sleutelwoorden zijn vrij te kiezen
+
+\Keywords{Quantum Computing. Quantum -- industrie} % Keywords
+\newcommand{\keywordname}{Sleutelwoorden} % Defines the keywords heading name
+
+%---------- Titel, inhoud -----------------------------------------------------
+
+\begin{document}
+
+\flushbottom % Makes all text pages the same height
+
+\maketitle % Print the title and abstract box
+
+\tableofcontents % Print the contents section
+
+\thispagestyle{empty} % Removes page numbering from the first page
+
+%------------------------------------------------------------------------------
+% Hoofdtekst
+%------------------------------------------------------------------------------
+
+% De hoofdtekst van het voorstel zit in een apart bestand, zodat het makkelijk
+% kan opgenomen worden in de bijlagen van de bachelorproef zelf.
+\input{voorstel-inhoud}
+
+%------------------------------------------------------------------------------
+% Referentielijst
+%------------------------------------------------------------------------------
+% TODO: de gerefereerde werken moeten in BibTeX-bestand ``voorstel.bib''
+% voorkomen. Gebruik JabRef om je bibliografie bij te houden en vergeet niet
+% om compatibiliteit met Biber/BibLaTeX aan te zetten (File > Switch to
+% BibLaTeX mode)
+
+\phantomsection
+\printbibliography[heading=bibintoc]
+\end{document}

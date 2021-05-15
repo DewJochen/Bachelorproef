@@ -8,23 +8,42 @@
 
 
 In this study there will be a comparison between the GNFS algorithm on a classical computer and Shor's algorithm on a quantum computer.
-In section \ref{sec:Other algorithms} discussing some other algorithms that can show benefits of quantum computing in the industry. To conclude there will be looked into the prime industries it could be used in.
+Section \ref{sec:Other algorithms} will discuss some other algorithms that can show the benefits of quantum computing in the industry. To conclude there will be looked into the main industries it could be used in.
 
 \section{The comparison}
 \subsection{General Number Field Sieve}
 \subsection{Shor's algorithm}
 \subsubsection{Gates}
 \label{subsubsec:gates}
-For building circuits, this study will be using IBM's quantum composer. The composer can be used in two differnt ways: drag and drop or writing code.
+For building circuits, this study will be using IBM's quantum composer. It can be used in two differnt ways: drag and drop or writing code.
 As mentioned in section \ref{sec:Composer} writing code in the composer is done with OpenQASM2.0 and the drag and drop uses lines that represent qubits on which gates or operators can be placed.
-Before making the algorithm, first the gates have to be illustrated. All the information of the operations can be found on the webside of IBM \footnote{$https://quantum-computing.ibm.com/composer/docs/iqx/operations_glossary$} on quantum computing as well as in \textcite{Hidary_2019} section 3.1 Quantum operators.
-There are 5 types of gates: classicals, quantums, phases, non-unitaries and the Hadamard. Each of these are reversible: when the same operation is used twice on a qubit, it's state will be the same as the starting state \autocite{reversible_gates, revgates}.
+All the gates used in the composer will be explained first. All the information of the operations can be found on the webside of IBM \footnote{$https://quantum-computing.ibm.com/composer/docs/iqx/operations_glossary$} on quantum computing as well as in \textcite{Hidary_2019} section 3.1 Quantum operators.
+There are 5 types of gates: classicals, quantums, phases, non-unitaries and the Hadamard gate. Most of the gates are reversible: when the same operation is used twice on a qubit, it's state will be the same as the starting state \autocite{reversible_gates, revgates}.
 
 The first gates that will be discussed are the classical gates, also known as Pauli gates. In this group 4 gates can be found: the NOT gate, the CNOT gate, the Toffoli gate and the SWAP gate.
 In figure \ref{fig:classical gates} the representation of the classical gates in composer is given in the following order, NOT, CNOT, Toffoli and SWAP.
 The not gate, or Pauli X gate, flips the state of a qubit. The controlled not gate, or CX, uses 2 qubits. One qubit is the target that will be flipped if the controll qubit is in state $\ket{1}$. It can also function as an operation to make an entanglement.
 In this case if the controll qubit is in a superposition, both qubits will be entangled. The Toffoli gate acts as a double CNOT gate. It uses two controll qubits that have to be in the $\ket{1}$ state to flip the target.
-Lastly there is the SWAP gate. This is a bit self-explanatory because it just swaps the states of two qubits. There is a special gate called the identity gate. In fact it's not a gate at all, this 'gate' is a blnak unit in th egate time to ensure nothing can happen with that qubit.
+Lastly there is the SWAP gate. This is self-explanatory because it just swaps the states of two qubits. There is a special gate called the identity gate. In fact it's not a gate at all, this 'gate' is a blank unit in the gate time to ensure nothing can happen with that qubit at that specic moment.
+
+Next up are the phase gates. This group of gates exists of the T gate, S gate, Z gate, T$\dagger$ gate, S$\dagger$ gate, phase gate and the RZ gate, and are shown in figure \ref{fig:phase gates}. These gates shift the phase of the qubits.
+The T$\dagger$ and S$\dagger$ gates are the inverse gates of the respectively T and S gate. And the T, S and Z gate are just 'special' cases of the phase gate.
+In table \ref{tab:pgates} the matrix representation of each gate can be found.
+
+There are 5 different non-unitary operators or modifiers. These operators are reset, measurement, the control modifier, IF and the barrier operation as shown in figure \ref{fig:non-uni gates}.
+The reset operations resets the qubit to the $\ket{0}$ state. This operation doesn't take any previous state into consideration and is not reversible.
+The measurement operation also is not reversible and measures the qubit. So it's output gives the value of the qubit in the standard basis.
+Applying an IF operation can give conditions to quantum gates. The conditions in the if operations depend on the state of the classical register, not the quantum one.
+When a circuit is executed the computer will try to combine gates to increase the efficiency. If these combinations should not happen, de barrier operation can be used.
+Lastly the control modifier is used with another operation. Say for example the Z-gate is used and a control modifier is applied to that, the Z-gate will only be executed if the qubit on which the control lays is in state $\ket{1}$.
+
+The Hadamard gate is used to make superpositions. When applying this gate to a qubit in state $\ket{1}$ or $\ket{0}$, it rotates it resulting respective states $\ket{-}$ and $\ket{+S}$
+
+$\sqrt{X}$, $\sqrt{X}$$\dagger$, Y, RX, RY, RXX, RZZ and U make up the last set of gates: the quantum gates. 
+The RX and RY respectively rotate the qubit around the x- and y-axis. The Y-gate is a special case of RY, where $\theta$ equals $\pi$.
+With the U-gate any single-qubit gate can be made. This is because it takes 3 angles as an input.
+$\sqrt{X}$ and it's inverse $\sqrt{X}$$\dagger$ can make a superposition if the qubit it is qpplied to is in state $\ket{0}$. If the gates is applied twice in a row the output wil give a standard NOT-gate.
+In table \ref{tab:qgates} a representation can be found on the matrixes of every quantum gate.
 
 \begin{figure} [h]
     \centering
@@ -33,39 +52,28 @@ Lastly there is the SWAP gate. This is a bit self-explanatory because it just sw
         \label{fig:classical gates}
 \end{figure}
 
-Next up are the phase gates. This group of gates exists of the T gate, S gate, Z gate, T$\dagger$ gate, S$\dagger$ gate, phase gate and the RZ gate. These gates shift the phase of the qubits.
-The T$\dagger$ and S$\dagger$ gates are the inverse gates of the respectively T and S gate. And terh T, S and Z gate are just 'special' cases of the phase gate.
-In table \ref{tab:gates} all the shift of the phase for every gates are showed in matrixform.
-
 \begin{table}[]
-\label{tab:gates}
-    \begin{tabular}{l|l}
-    \hline
-    \multicolumn{1}{|l|}{Phase Gate}  & \multicolumn{1}{l|}{Shift on the phase}                            \\ \hline
-    T                                 & $\begin{pmatrix}1&0// 0& \exp(i\frac{\theta}{4})\end{pmatrix}$     \\
-    Z                                 & $\begin{pmatrix}1&0//0& -1\end{pmatrix}$                           \\
-    S                                 & $\begin{pmatrix}1&0//0& i\end{pmatrix}$                            \\
-    T$\dagger$                        & $\begin{pmatrix}1&0//0& \exp(-i\frac{\theta}{4})\end{pmatrix}$     \\
-    S$\dagger $                       & $\begin{pmatrix}1&0//0& -i\end{pmatrix}$                           \\
-    P                                 & $\begin{pmatrix}1&0//0& \exp(i\lambda)\end{pmatrix}$               \\
-    RZ                                & $\begin{pmatrix}\exp(-i\frac{\lambda}{2})&0//0& \exp(i\frac{\lambda}{2})\end{pmatrix}$                                    
-    \end{tabular}
-    \caption{The shifts on the phase from any phase gate.}
+\label{tab:pgates}
+        \begin{tabular}{l|l}
+        \hline
+        \multicolumn{1}{|l|}{Phase Gate}  & \multicolumn{1}{l|}{Matrix representation of the gate}               \\ \hline
+        T                                 & $\begin{pmatrix}1&0 \\ 0& \exp(i\frac{\theta}{4})\end{pmatrix}$      \\
+        Z                                 & $\begin{pmatrix}1&0 \\ 0& -1\end{pmatrix}$                           \\
+        S                                 & $\begin{pmatrix}1&0 \\ 0& i\end{pmatrix}$                            \\
+        T$\dagger$                        & $\begin{pmatrix}1&0 \\ 0& \exp(-i\frac{\theta}{4})\end{pmatrix}$     \\
+        S$\dagger $                       & $\begin{pmatrix}1&0 \\ 0& -i\end{pmatrix}$                           \\
+        P                                 & $\begin{pmatrix}1&0 \\ 0& \exp(i\lambda)\end{pmatrix}$               \\
+        RZ                                & $\begin{pmatrix}\exp(-i\frac{\lambda}{2})&0 \\ 0& \exp(i\frac{\lambda}{2})\end{pmatrix}$                                    
+        \end{tabular}
+        \caption{Matrix representations of the phase gates.}
 \end{table}
-
+    
 \begin{figure} [h]
     \centering
     \includegraphics[width=\textwidth]{img/phase-gates.PNG}
         \caption{A visual representation of the phase gates}
         \label{fig:phase gates}
 \end{figure}
-
-There are 5 different non-unitary operators or modifiers. These operators are reset, measurement, IF and the barrier operation. There is also one modifier: the control modifier.
-The reset operations resets the qubit to the $\ket{0}$. This operation doesn't take any previous state into consideration and is not reversible.
-The measurement operation also is not reversible and measures the qubit. So it's output gives the value of the qubit in the standard basis.
-Applying an IF operation can give conditions to quantum gates. The conditions in the if operations depend on the state of the classical register, not the quantum one.
-When a circuit is executed the computer will try to combine gates to increase te efficiency. If these combinations should not happen, de barrier operation can be used.
-Lastly the control modifier is used with another operation. Say for example the Z-gate is used and a control modifier is applied to that, the Z-gate will only be executed if the qubit on which the control lays is in state $\ket{1}$.
 
 \begin{figure} [h]
     \centering
@@ -74,8 +82,6 @@ Lastly the control modifier is used with another operation. Say for example the 
         \label{fig:non-uni gates}
 \end{figure}
 
-The Hadamard gate is used to make superpositions. When appling this gate to a qubit in state $\ket{1}$ or $\ket{0}$, it rotates it resulting respective states $\ket{-}$ and $\ket{+S}$
-
 \begin{figure} [h]
     \centering
     \includegraphics[width=\textwidth]{img/hadamard-gate.PNG}
@@ -83,7 +89,22 @@ The Hadamard gate is used to make superpositions. When appling this gate to a qu
         \label{fig:hadamard gates}
 \end{figure}
 
-$\sqrt{x}$, $\sqrt{x}$$\dagger$, Y, RX, RY, RXX, RZZ and U make up the last set of gates: the quantum gates.
+\begin{table}[]
+\label{tab:qgates}
+        \begin{tabular}{l|l}
+        \hline
+        \multicolumn{1}{|l|}{Phase Gate}  & \multicolumn{1}{l|}{Matrix representation of the gate}                                                                                                                                                                                                                         \\ \hline
+        RX                                & $\begin{pmatrix} \cos\frac{\theta}{2}&-i\sin\frac{\theta}{2}              \\ -i\sin\frac{\theta}{2}&\cos\frac{\theta}{2}                                                                                                                                        \end{pmatrix}$ \\
+        RY                                & $\begin{pmatrix} \cos\frac{\theta}{2}&-\sin\frac{\theta}{2}               \\ \cos\frac{\theta}{2}&\sin\frac{\theta}{2}                                                                                                                                          \end{pmatrix}$ \\
+        RXX                               & $\begin{pmatrix} \cos\frac{\theta}{2}&0&0&-i\sin\frac{\theta}{2}          \\ 0&\cos\frac{\theta}{2}&-i\sin\frac{\theta}{2}&0                           \\ 0&-i\sin\frac{\theta}{2}&\cos\frac{\theta}{2}&0 \\ -i\sin\frac{\theta}{2}&0&0&\cos\frac{\theta}{2}    \end{pmatrix}$ \\                               
+        RZZ                               & $\begin{pmatrix} \exp(-i\frac{\theta}{2})&0&0&0                           \\ 0&\exp(i\frac{\theta}{2})&0&0                                             \\ 0&0&\exp(i\frac{\theta}{2})&0 \\ 0&0&0&\exp(-i\frac{\theta}{2})                                       \end{pmatrix}$ \\         
+        $\sqrt{X}$                        & $\begin{pmatrix} 1+i&1-i                                                  \\ 1-i&1+i                                                                                                                                                                            \end{pmatrix}$ \\
+        $\sqrt{X}\dagger$                 & $\begin{pmatrix} 1-i&1+i                                                  \\ 1+i&1-i                                                                                                                                                                            \end{pmatrix}$ \\
+        U                                 & $\begin{pmatrix} \cos\frac{\theta}{2}&-\exp(i\lambda)\sin\frac{\theta}{2} \\ \exp(i\phi)\sin\frac{\theta}{2}&\exp(i(\phi+\lambda))\cos\frac{\theta}{@}                                                                                                          \end{pmatrix}$ \\
+        Y                                 & $\begin{pmatrix} 0&-i \\ i&0                                                                                                                                                                                                                                    \end{pmatrix}$                                   
+        \end{tabular}
+        \caption{Matrix representations of the quantum gates.}
+\end{table}
 
 \begin{figure} [h]
     \centering
@@ -92,6 +113,7 @@ $\sqrt{x}$, $\sqrt{x}$$\dagger$, Y, RX, RY, RXX, RZZ and U make up the last set 
         \label{fig:quantum gates}
 \end{figure}
 
+\subsubsection{The algorithm}
 \section{Other algorithms}
 \label{sec:Other algorithms}
 \section{The use of quantum computing}

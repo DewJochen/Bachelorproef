@@ -87,18 +87,18 @@ To understand how a quantum computer works, one should start at the base of that
 
 
 \subsection{Classical computer} \label{classical computer}
-A computer consists two main parts: software and hardware. The hardware are the physical parts that make the computer: like a central processing unit (or CPU in short), Random Access Memory (RAM) and many other parts.
+A computer consists two main parts: software and hardware. The hardware are the physical parts that make the computer: like a central processing unit (CPU), Random Access Memory (RAM) and many other parts.
 Software on the other hand are the programs that run on the pc. Think of the Operating System (OS) and programs like Word, PowerPoint and may others.
 
 
 \subsubsection{Hardware} \label{hardware}
 A motherbord, CPU, RAM, hard drive and a power supply are the basics every pc should have in order to work.
 Add-ons like a Graphical processing unit (GPU or grapic card), a nice case to put everything in, a network card and cooling are nice to have and can help make the pc run better or faster.
-The central processing unit is the brain of the computer. It makes all the calculations that should be done.
+The central processing unit is the brain of the computer. It makes all the calculations.
 Then there is the motherboard. This could be seen like the nervous system of the pc: everything is connected to it and it lets every part speak with eachother.
 Whilst the CPU is calculating things, some of the calculations should be stored for a while and this is put in the RAM. Random access memory is volatile which means that when the pc is shut down everything stored on it is lost.
-That's why there is a hard disk. The hard drive stores all the items that should be stored for a longer time. So when a word document is being written it starts in the RAM, but the second the file is saved it is transferred to the hard disk.
-Since every component of a computer works on chips that are based on voltages, there is a need for electricity. This is where the power supply (sometimes shortened as PSU) comes in handy. This takes in the power from an outlet and converts it to the right amounts so the components won't get fried.
+That is why there is a hard disk. The hard drive stores all the items that should be stored for a longer time. So when a word document is being written it starts in the RAM, but the second the file is saved it is transferred to the hard disk.
+Since every component of a computer works on chips that are based on voltages, there is a need for electricity. This is where the power supply (PSU) comes in handy. This takes in the power from an outlet and converts it to the right amounts so the components won't get fried.
 There is also hardware that is connected to the computer. This lets somebody work with it. Examples of external hardware are a monitor, keyboard and mouse, a printer, etc.
 These were the basics explained so that the pc can run, but there are many other part where the info from can be found on \cite[https://edu.Fcfglobal.org/en/computerbasics/]{ComputerBasics}.
 
@@ -134,17 +134,17 @@ There are six logic gates: AND, OR, EXOR, NAND, NOR and EXNOR \autocite{gates}. 
         \href{https://frankcomputerscience.wordpress.com/chapter-3/}{Source: Frank Computer Science}
 \end{figure}
 
-This all means that to make faster pc's, the CPU's have to be faster. And this can only be done by placing more transistors on the CPU, because more transistors equals more calcuations.
+This all means that to make faster pc's, the CPU's have to be faster. And this can only be done by placing more transistors on the CPU, because more transistors means more calcuations.
 At this moment, the amount of transistors that can be put on a chip is still rising. This is defined by \textcite{Moore1965}'s law: it started out with every year the amount doubles. But since they are getting closer to the physical bounds, this changed to every two years.
 
 
 \subsection{Quantum computer} \label{quantum computer}
 The big difference between the classical computer and a quantum computer is the unit of a calculation: quantum computers don't use bits but use qubits.
-It is the qubit that allows to do faster calcuations because of it's quantum mechanical nature.
+The qubit allows faster calcuations because of it's quantum mechanical nature.
 
 
 \subsubsection{The qubit} \label{qubit}
-A qubit is the analogue of the classical bit. It too has 2 states: $\ket{0}$ and $\ket{1}$, but it can be in a linear combination of those 2 base states called the superposition \autocite{thequbit}.
+A qubit is the analogue of the classical bit. It has 2 states: $\ket{0}$ and $\ket{1}$, but it can be in a linear combination of those 2 base states called the superposition \autocite{thequbit}.
 \begin{equation}
     \ket{\phi} = \alpha * \ket{0} + \beta * \ket{1}
 \end{equation}
@@ -188,9 +188,9 @@ And because atoms want to be in the lowest possible energystate(the groundstate)
 
 \subsubsection{The hardware}
 Since generating a qubit is very difficult work and the slightest change may give errors in calculations, there is a big need to control the outside noice.
-The article by \textcite{Cooling} states that to ensure to minimize the chamce of qubits flipping between quantum states, the computer has to be cooled so that the energy level inside it is at it's lowest possible point.
+The article by \textcite{Cooling} states that to ensure to minimize the chance of qubits flipping between quantum states, the computer has to be cooled so that the energy level inside it is at it's lowest possible point.
 Since a qubit heats up when it's used in calculations \autocite{Cooling}, the cooling must be very good. This is why they cool the qubit to temperatures around the absolute zero: zero degrees Kelvin (0°K or -273,15°C).
-This cooling system is what makes the quantum computer so big, most of the photo's are in fact just the refrigerators. This is the quantum part of the quantum computer. Nut quantum computers don't work like a conventional computer, it can't connect to the internet on it's own, it can't store a lot of data on drives, etc.
+This cooling system is what makes the quantum computer so big, most of the photo's are in fact just the refrigerators. This is the quantum part of the quantum computer. But quantum computers don't work like a conventional computer, it can not connect to the internet on it's own, it can not store a lot of data on drives, etc.
 To achieve this there is a need of a classical part: a classical computer that is connect to the quantum computer so that interaction with it can be achieved. This part is used to build the applications for the quantum computer \autocite{qhardware}.
 
 The processor itself is the central part that's seen in figure \ref*{fig:Quantum computer cooling}, all the other yellow parts can be seen is the cooling system.
@@ -205,8 +205,8 @@ A quantum computer consists of 4 hardware layers: quantum data plane, control an
     \item The control and measurement plane
 
         \quad The control and measurement plane is the plane where all the operations on the qubits happen. It takes the signals of the control processor plane and converts them so the operations can be executed.
-        Next to converting signals to execute operations, the control and measurement plane is also in chargo of converting the signals from the measurements to binary data so that the data can be processed. As can be read in the findings on section 5.1.2 in \textcite{qhardware},
-        this plane holds back the speed of the computer: the speed can not be faster than the speed to create a control signal.
+        Next to converting signals to execute operations, the control and measurement plane is also in chargo of converting the signals from the measurements to binary data so that the data can be processed.
+        This plane holds back the speed of the computer: the speed can not be faster than the speed to create a control signal.
 
     \item The control processor plane
 

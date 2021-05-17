@@ -12,6 +12,12 @@ Section \ref{sec:Other algorithms} will discuss some other algorithms that can s
 
 \section{The comparison}
 \subsection{General Number Field Sieve}
+There are several ways to factor numbers. Brute forcing it is probably the worst of all because the larger the number gets the longer it takes. Then there are the sieves, they can factor larger number way quicker then the brute force method.
+There's the quadratic sieve and eventhough it is more effecient than the brute method, it is not the most efficient \autocite{Quadratic_sieve}. At the moment of writing the most efficient algorithm to factor large numbers is the general number field sieve \autocite{shor_algo}.
+
+\subsubsection{Time complexity}
+
+As read in \textcite{shor_algo}'s docum
 \subsection{Shor's algorithm}
 \subsubsection{Gates}
 \label{subsubsec:gates}
@@ -114,6 +120,11 @@ In table \ref{tab:qgates} a representation can be found on the matrixes of every
 \end{figure}
 
 \subsubsection{The algorithm}
+
+Shor's algorithm is already build for anybody to use in Qiskit \footnote{Qiskit is the open source SDK from IBM for working with OpenQasm}. There is documentation written with the code fo further explaination.
+The code is run in IBM's Quantum lab, but the circuit is also available on the composer. Since it would be useless to rewrite the algorithm, this study will use this code and run it in Quantum Lab.
+
+
 \section{Other algorithms}
 \label{sec:Other algorithms}
 \section{The use of quantum computing}

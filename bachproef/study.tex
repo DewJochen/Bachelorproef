@@ -14,10 +14,10 @@ Section \ref{sec:Other algorithms} will discuss some other algorithms that can s
 \subsection{General Number Field Sieve}
 There are several ways to factor numbers. Brute forcing it is probably the worst of all because the larger the number gets the longer it takes. Then there are the sieves, they can factor larger number way quicker then the brute force method.
 There's the quadratic sieve and eventhough it is more effecient than the brute method, it is not the most efficient \autocite{Quadratic_sieve}. At the moment of writing the most efficient algorithm to factor large numbers is the general number field sieve \autocite{shor_algo}.
-
+The GNFS can not factor prime powers
 \subsubsection{Time complexity}
+Let's say there is a number N that should be factored. N has a number of digits equal to d. In \textcite{shor_algo} is stated that this has a runtime exponential in d\textsuperscript{$\frac{1}{3}$}.
 
-As read in \textcite{shor_algo}'s docum
 \subsection{Shor's algorithm}
 \subsubsection{Gates}
 \label{subsubsec:gates}

@@ -18,6 +18,7 @@ The GNFS can not factor prime powers
 \subsubsection{Time complexity}
 Let's say there is a number N that should be factored. N has a number of digits equal to d. In \textcite{shor_algo} is stated that this has a runtime exponential in d\textsuperscript{$\frac{1}{3}$}.
 
+To factor a integer n the number field sieve would have a running time of $\mathcal{O}(exp(c(log n)^(1/3)(log)))$
 \subsection{Shor's algorithm}
 \subsubsection{Gates}
 \label{subsubsec:gates}
@@ -123,6 +124,10 @@ In table \ref{tab:qgates} a representation can be found on the matrixes of every
 
 Shor's algorithm is already build for anybody to use in Qiskit \footnote{Qiskit is the open source SDK from IBM for working with OpenQasm}. There is documentation written with the code fo further explaination.
 The code is run in IBM's Quantum lab, but the circuit is also available on the composer. Since it would be useless to rewrite the algorithm, this study will use this code and run it in Quantum Lab.
+In qiskit the code in \ref is written and executed. The first block are import to use the right 
+
+\begin{lstlisting}
+\end{lstlisting}
 
 
 \section{Other algorithms}

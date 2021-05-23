@@ -8,128 +8,128 @@
 
 
 In this study there will be a comparison between the GNFS algorithm on a classical computer and Shor's algorithm on a quantum computer.
-Section \ref{sec:Other algorithms} will discuss some other algorithms that can show the benefits of quantum computing in the industry. To conclude there will be looked into the main industries it could be used in.
-
+Section \ref{sec:Fields of use} will discuss some other algorithms that can show the benefits of quantum computing in the industry.
 \section{The comparison}
 \subsection{General Number Field Sieve}
+\subsubsection{How it works}
 There are several ways to factor numbers. Brute forcing it is probably the worst of all because the larger the number gets the longer it takes. Then there are the sieves, they can factor larger number way quicker then the brute force method.
 There's the quadratic sieve and eventhough it is more effecient than the brute method, it is not the most efficient \autocite{Quadratic_sieve}. At the moment of writing the most efficient algorithm to factor large numbers is the general number field sieve \autocite{shor_algo}.
-The GNFS can not factor prime powers
-\subsubsection{Time complexity}
+The GNFS can not factor prime powers.
+
+\subsubsection{Complexity}
 Let's say there is a number N that should be factored. N has a number of digits equal to d. In \textcite{shor_algo} is stated that this has a runtime exponential in d\textsuperscript{$\frac{1}{3}$}.
-
-To factor a integer n the number field sieve would have a running time of $\mathcal{O}(exp(c(log n)^(1/3)(log)))$
-\subsection{Shor's algorithm}
-\subsubsection{Gates}
-\label{subsubsec:gates}
-For building circuits, this study will be using IBM's quantum composer. It can be used in two differnt ways: drag and drop or writing code.
-As mentioned in section \ref{sec:Composer} writing code in the composer is done with OpenQASM2.0 and the drag and drop uses lines that represent qubits on which gates or operators can be placed.
-All the gates used in the composer will be explained first. All the information of the operations can be found on the webside of IBM \footnote{$https://quantum-computing.ibm.com/composer/docs/iqx/operations_glossary$} on quantum computing as well as in \textcite{Hidary_2019} section 3.1 Quantum operators.
-There are 5 types of gates: classicals, quantums, phases, non-unitaries and the Hadamard gate. Most of the gates are reversible: when the same operation is used twice on a qubit, it's state will be the same as the starting state \autocite{reversible_gates, revgates}.
-
-The first gates that will be discussed are the classical gates, also known as Pauli gates. In this group 4 gates can be found: the NOT gate, the CNOT gate, the Toffoli gate and the SWAP gate.
-In figure \ref{fig:classical gates} the representation of the classical gates in composer is given in the following order, NOT, CNOT, Toffoli and SWAP.
-The not gate, or Pauli X gate, flips the state of a qubit. The controlled not gate, or CX, uses 2 qubits. One qubit is the target that will be flipped if the controll qubit is in state $\ket{1}$. It can also function as an operation to make an entanglement.
-In this case if the controll qubit is in a superposition, both qubits will be entangled. The Toffoli gate acts as a double CNOT gate. It uses two controll qubits that have to be in the $\ket{1}$ state to flip the target.
-Lastly there is the SWAP gate. This is self-explanatory because it just swaps the states of two qubits. There is a special gate called the identity gate. In fact it's not a gate at all, this 'gate' is a blank unit in the gate time to ensure nothing can happen with that qubit at that specic moment.
-
-Next up are the phase gates. This group of gates exists of the T gate, S gate, Z gate, T$\dagger$ gate, S$\dagger$ gate, phase gate and the RZ gate, and are shown in figure \ref{fig:phase gates}. These gates shift the phase of the qubits.
-The T$\dagger$ and S$\dagger$ gates are the inverse gates of the respectively T and S gate. And the T, S and Z gate are just 'special' cases of the phase gate.
-In table \ref{tab:pgates} the matrix representation of each gate can be found.
-
-There are 5 different non-unitary operators or modifiers. These operators are reset, measurement, the control modifier, IF and the barrier operation as shown in figure \ref{fig:non-uni gates}.
-The reset operations resets the qubit to the $\ket{0}$ state. This operation doesn't take any previous state into consideration and is not reversible.
-The measurement operation also is not reversible and measures the qubit. So it's output gives the value of the qubit in the standard basis.
-Applying an IF operation can give conditions to quantum gates. The conditions in the if operations depend on the state of the classical register, not the quantum one.
-When a circuit is executed the computer will try to combine gates to increase the efficiency. If these combinations should not happen, de barrier operation can be used.
-Lastly the control modifier is used with another operation. Say for example the Z-gate is used and a control modifier is applied to that, the Z-gate will only be executed if the qubit on which the control lays is in state $\ket{1}$.
-
-The Hadamard gate is used to make superpositions. When applying this gate to a qubit in state $\ket{1}$ or $\ket{0}$, it rotates it resulting respective states $\ket{-}$ and $\ket{+S}$
-
-$\sqrt{X}$, $\sqrt{X}$$\dagger$, Y, RX, RY, RXX, RZZ and U make up the last set of gates: the quantum gates. 
-The RX and RY respectively rotate the qubit around the x- and y-axis. The Y-gate is a special case of RY, where $\theta$ equals $\pi$.
-With the U-gate any single-qubit gate can be made. This is because it takes 3 angles as an input.
-$\sqrt{X}$ and it's inverse $\sqrt{X}$$\dagger$ can make a superposition if the qubit it is qpplied to is in state $\ket{0}$. If the gates is applied twice in a row the output wil give a standard NOT-gate.
-In table \ref{tab:qgates} a representation can be found on the matrixes of every quantum gate.
-
-\begin{figure} [h]
-    \centering
-    \includegraphics[width=\textwidth]{img/classical-gates.PNG}
-        \caption{A visual representation of the classical gates}
-        \label{fig:classical gates}
-\end{figure}
-
-\begin{table}[]
-\label{tab:pgates}
-        \begin{tabular}{l|l}
-        \hline
-        \multicolumn{1}{|l|}{Phase Gate}  & \multicolumn{1}{l|}{Matrix representation of the gate}               \\ \hline
-        T                                 & $\begin{pmatrix}1&0 \\ 0& \exp(i\frac{\theta}{4})\end{pmatrix}$      \\
-        Z                                 & $\begin{pmatrix}1&0 \\ 0& -1\end{pmatrix}$                           \\
-        S                                 & $\begin{pmatrix}1&0 \\ 0& i\end{pmatrix}$                            \\
-        T$\dagger$                        & $\begin{pmatrix}1&0 \\ 0& \exp(-i\frac{\theta}{4})\end{pmatrix}$     \\
-        S$\dagger $                       & $\begin{pmatrix}1&0 \\ 0& -i\end{pmatrix}$                           \\
-        P                                 & $\begin{pmatrix}1&0 \\ 0& \exp(i\lambda)\end{pmatrix}$               \\
-        RZ                                & $\begin{pmatrix}\exp(-i\frac{\lambda}{2})&0 \\ 0& \exp(i\frac{\lambda}{2})\end{pmatrix}$                                    
-        \end{tabular}
-        \caption{Matrix representations of the phase gates.}
-\end{table}
-    
-\begin{figure} [h]
-    \centering
-    \includegraphics[width=\textwidth]{img/phase-gates.PNG}
-        \caption{A visual representation of the phase gates}
-        \label{fig:phase gates}
-\end{figure}
-
-\begin{figure} [h]
-    \centering
-    \includegraphics[width=\textwidth]{img/non-unitary-gates.PNG}
-        \caption{A visual representation of the non-unitary gates}
-        \label{fig:non-uni gates}
-\end{figure}
-
-\begin{figure} [h]
-    \centering
-    \includegraphics[width=\textwidth]{img/hadamard-gate.PNG}
-        \caption{A visual representation of the hadamard gate}
-        \label{fig:hadamard gates}
-\end{figure}
-
-\begin{table}[]
-\label{tab:qgates}
-        \begin{tabular}{l|l}
-        \hline
-        \multicolumn{1}{|l|}{Phase Gate}  & \multicolumn{1}{l|}{Matrix representation of the gate}                                                                                                                                                                                                                         \\ \hline
-        RX                                & $\begin{pmatrix} \cos\frac{\theta}{2}&-i\sin\frac{\theta}{2}              \\ -i\sin\frac{\theta}{2}&\cos\frac{\theta}{2}                                                                                                                                        \end{pmatrix}$ \\
-        RY                                & $\begin{pmatrix} \cos\frac{\theta}{2}&-\sin\frac{\theta}{2}               \\ \cos\frac{\theta}{2}&\sin\frac{\theta}{2}                                                                                                                                          \end{pmatrix}$ \\
-        RXX                               & $\begin{pmatrix} \cos\frac{\theta}{2}&0&0&-i\sin\frac{\theta}{2}          \\ 0&\cos\frac{\theta}{2}&-i\sin\frac{\theta}{2}&0                           \\ 0&-i\sin\frac{\theta}{2}&\cos\frac{\theta}{2}&0 \\ -i\sin\frac{\theta}{2}&0&0&\cos\frac{\theta}{2}    \end{pmatrix}$ \\                               
-        RZZ                               & $\begin{pmatrix} \exp(-i\frac{\theta}{2})&0&0&0                           \\ 0&\exp(i\frac{\theta}{2})&0&0                                             \\ 0&0&\exp(i\frac{\theta}{2})&0 \\ 0&0&0&\exp(-i\frac{\theta}{2})                                       \end{pmatrix}$ \\         
-        $\sqrt{X}$                        & $\begin{pmatrix} 1+i&1-i                                                  \\ 1-i&1+i                                                                                                                                                                            \end{pmatrix}$ \\
-        $\sqrt{X}\dagger$                 & $\begin{pmatrix} 1-i&1+i                                                  \\ 1+i&1-i                                                                                                                                                                            \end{pmatrix}$ \\
-        U                                 & $\begin{pmatrix} \cos\frac{\theta}{2}&-\exp(i\lambda)\sin\frac{\theta}{2} \\ \exp(i\phi)\sin\frac{\theta}{2}&\exp(i(\phi+\lambda))\cos\frac{\theta}{@}                                                                                                          \end{pmatrix}$ \\
-        Y                                 & $\begin{pmatrix} 0&-i \\ i&0                                                                                                                                                                                                                                    \end{pmatrix}$                                   
-        \end{tabular}
-        \caption{Matrix representations of the quantum gates.}
-\end{table}
-
-\begin{figure} [h]
-    \centering
-    \includegraphics[width=\textwidth]{img/quantum-gates.PNG}
-        \caption{A visual representation of the quantum gates}
-        \label{fig:quantum gates}
-\end{figure}
-
+To factor a integer n the number field sieve would have a running time of $\mathcal{O} = (exp(\sqrt[3]{\frac{64}{9}}(log(N)^\frac{1}{3}(log log N)^\frac{2}{3}$ \autocite{nfscomp}.
+The complexity of the algorithm can be written as $L_N[\frac{1}{3},\sqrt[3]{\frac{64}{9}}]$ and is the same for time as for space.
 \subsubsection{The algorithm}
+Without going deeper into them, these are the steps of the number field sieve algorithm:
+\begin{enumerate}
+    \item Polynomial selection
+    \item Sieving
+    \item Solving equations
+    \item Finding square roots
+\end{enumerate}
+This study looked into the implemetation from \textcite{cadoNFS}. Since the program did not want to work for this study, the results of the develloping team will be used.
+On the site, \textcite{cadoNFS} state that with their latest release of the program it takes a CPU time of 26 hours to factor RSA-120. RSA is an algorithm used in cryptography where the number stand for how many digits there are in the semiprime used in that algorithm.
+So RSA-120 uses a semiprime of 120 decimal digits. At the moment of writting the highest RSA that has been factored is RSA-250 and is factored in 2020 by Fabrice Boudot, Pierrick Gaudry, Aurore Guillevic, Nadia Heninger, Emmanuel Thomé, and Paul Zimmermann.
+The CAD)-NFS implementation takes 107 CPU hours to factor the RSA-130, 352 hours for RSA-140 and 83 days for RSA-155. From this can be concluded that the amount of CPU-time needed exponentially rises with the amout of digits in the number.
 
+\subsection{Shor's algorithm}
+\subsubsection{How it works}
+In Shor's algorithm there are 2 main parts: a classical part and a quantum part.
+There are eleven steps as written in \textcite{shor_step} article, the steps With a C in front of them are done on a classical computer, the steps with a Q un a quantum computer.
+\begin{enumerate}
+    \item (C)Determine if N is even, a prime or a power of a prime. These numbers can be factored efficiently without using Shor. 
+    \item (C)Choose q so $N^2<q<2N^2$.
+    \item (C)Pick a random a that is coprime with N so gdc(N,a) = 1.
+    \item (C)Create a quantum register partioned in 2 parts.
+    \item (Q)Load register 1 with a superposition of the integers from 0 to q-1. Load register 2 with zeroes.
+    \item (Q)Apply $x^a mod N$ to each number in register 1 and store its reult in register 2.
+    \item (Q)Measure register 2 and observe some value k. This has an effect on register 1: it collapses into a superposition.
+    \item (Q)Apply the discrete Fourier Transform on register 1.
+    \item (Q)Measure the state of register 1 which values m.
+    \item (C)Calculate r, the desired period, from m
+    \item (C)Determine the factors of N throug r.
+
+\end{enumerate}
+\subsubsection{Complexity}
+As \textcite{shor_algo} writes, Shor's algorithm has a runtime of $d^3$, where d is the amount of digits in the factoring number N. In the lagorithm used in this study it only need 10d qubits to factor N.
+So the time complexity can be written as: $\mathcal{O} = log(N)^2log log(N) log log log(N)$ \autocite{shor_comp}. And the space complexity will be $\mathcal{O}(N)$.
+\subsubsection{The algorithm}
 Shor's algorithm is already build for anybody to use in Qiskit \footnote{Qiskit is the open source SDK from IBM for working with OpenQasm}. There is documentation written with the code fo further explaination.
 The code is run in IBM's Quantum lab, but the circuit is also available on the composer. Since it would be useless to rewrite the algorithm, this study will use this code and run it in Quantum Lab.
-In qiskit the code in \ref is written and executed. The first block are import to use the right 
+The following code is used to run Shor's algorithm in qiskit. The first block, line one through six, are imports to be able to use the shor-methods.
+
+The first two lines of the second block make a backend. And eventhough it says it is a simulator, all the code is executed on a quantum computer.
+On line 9 and 10 an instance is made. This instance uses the backend that is defined and runs the algorithm 500 times. Shor's algorithm doesn't always have a correct answer, by running it 500 times it ensures us the correct answer.
+The last two line makes an instance ms of Shor with the given quantum instance.
+The last block is where the calculating happens.
+From line 13 the execution time will come.
+Line 17 executes the factoring for every number from the list in lines 14-15. Here all the examples are given at the same time. The problem with this is that if all are ran at the same time, line 13 would give the executing time of all the numbers combined.
+So when it is run for testing, the number will be executed one by one.
+The last line gives us the the 2 factors of the number.
+Every number is factored 3 times. This way we can see outliers in the execution time and can normailze them.
+The results of the algorithm can be found in table \ref{tab:results}. For the last 3 numbers no results were found. 
+From this a conclusion can be made. Eventhough there is an algorithm to efficiently factor number with a quantum computer, the technology is not quite there yet.
+The amount of qubit that cqn be worked with is not enough to do big calculation like factoring large numbers.
 
 \begin{lstlisting}
+    01. from qiskit.algorithms import Shor
+    02. from qiskit.utils import QuantumInstance
+    03. import numpy as np
+    04. from qiskit import QuantumCircuit, Aer, execute
+    05. from qiskit.tools.visualization import
+    06.            plot_histogram
+
+    07. backend = Aer.get_backend(
+    08.    'aer_simulator_matrix_product_state')
+    09. quantum_instance = QuantumInstance(
+    10.                backend, shots=500)
+    11. ms = Shor(quantum_instance=
+    12.        quantum_instance)
+
+    13. %%time
+    14. list = [15,21,35,33,55,77,39,65,91,
+    15.        143,51,85,119,187,221]
+    16. for x in list:
+    17.    result = ms.factor(N=x)
+    18.    print(result.factors)
 \end{lstlisting}
 
+\begin{table}[h]
+\label{tab:results}
+    \caption{Result of running the algorithm on the numbers N}
+    \begin{tabular}{|l|l|l|l|l|l|l|}
+    \hline
+    N   & Factors   & T1(s) & T2(s) & T3(s) & Average execution time (s)        & Found              \\ \hline
+    15  & 3 and 5   & 37,1  & 37,3  & 35,9  & 36,8                              & yes                \\
+    21  & 3 and 7   & 19,5  & 22,9  & 16,9  & 19,8                              & yes                \\
+    33  & 3 and 11  & 38,5  & 32,7  & 30,9  & 34,0                              & no                 \\
+    35  & 5 and 7   & 26,4  & 27,1  & 36,3  & 29,9                              & yes                \\
+    39  & 3 and 13  & 33,3  & 36,1  & 32,2  & 33,9                              & yes                \\
+    51  & 3 and 17  & 30,7  & 30,9  & 30,1  & 30,6                              & yes                \\
+    55  & 5 and 11  & 29,5  & 31,2  & 32,9  & 31,2                              & yes                \\
+    65  & 5 and 13  & 84    & 82    & 80    & 82                                & yes                \\
+    77  & 7 and 11  & 75    & 73    & 76    & 75                                & yes                \\
+    85  & 5 and 17  & 79    & 90    & 75    & 81                                & yes                \\
+    91  & 7 and 13  & 80    & 75    & 76    & 77                                & yes                \\
+    119 & 7 and 17  & 71    & 73    & 76    & 73                                & yes                \\
+    143 & 11 and 13 & /     & /     & /     & No result after 10 minutes        & No                 \\
+    187 & 11 and 17 & /     & /     & /     & No result after 10 minutes        & No                 \\
+    221 & 13 and 17 & /     & /     & /     & No result after 10 minutes        & No                 \\ \hline
+    \end{tabular}
+\end{table}
 
-\section{Other algorithms}
-\label{sec:Other algorithms}
-\section{The use of quantum computing}
+\section{Fields of use}
+\label{sec:Fields of use}
+Another greatly knwo algorithm is \textcite{grover}'s algorithm.
+This algorithm is the quantum equivalent of an unstructered search and can even be used in other algorithm's to speed them up,this is called 'the amplitude amplification trick'.
+Companies wig big datacenters with lots of unstructered databases could really benefit from this. Say the database is N entries long. A normal search would have to look, on average, at half of the entries to find the one that's needed.
+If Grover's algorithm is used the amount can be reduced to $\sqrt{N}$, which is an significant improvement \autocite{qiskitgrover}.
+
+Another industry benefitting from quantum computing is the drug-creation companies.
+With the Variational Quantum Eigensolver the minimum eigenvalue of a matrix can be found \autocite{simmol}. This translates to the ground state energy of a molecule that can be used to predict the rates of chemical reaction dynamics \autocite{chem}.
+
+Quantum computing is also getting used in machine learning. It can help by executing difficult and long calculations to optimise classical machine learning algorithms or it machine learning is used to improve the quantum algorithms \autocite{qml}.
+
+Algorithms to model quantum systems on a quantum computer are already being written. This could speedup and make the simulations more realistic than a classical computer could do \autocite{simulation}.
+If there are realistic models of quantum systems researchers can look at the impact of different conditions on the system in a safe way. 

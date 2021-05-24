@@ -10,6 +10,10 @@
 In this study there will be a comparison between the GNFS algorithm on a classical computer and Shor's algorithm on a quantum computer.
 Section \ref{sec:Fields of use} will discuss some other algorithms that can show the benefits of quantum computing in the industry.
 \section{The comparison}
+
+To compare both algorithms a list of numbers will be used that both should factor. Each number will be factored 3 times and the time needed will be captured. Then the average of the 3 factorazations will be calculated and used for comparison.
+There is a small problem though. The technologie in quantum computing has yet reached far enough to factor large numbers. The amount of qubits to calculate those factorizations is not yet available. 
+That's why this study factors some small integers in the quantum part. For the classical part larger numbers (N > $10^100$) will be used.
 \subsection{General Number Field Sieve}
 \subsubsection{How it works}
 There are several ways to factor numbers. Brute forcing it is probably the worst of all because the larger the number gets the longer it takes. Then there are the sieves, they can factor larger number way quicker then the brute force method.
@@ -28,10 +32,25 @@ Without going deeper into them, these are the steps of the number field sieve al
     \item Solving equations
     \item Finding square roots
 \end{enumerate}
-This study looked into the implemetation from \textcite{cadoNFS}. Since the program did not want to work for this study, the results of the develloping team will be used.
+This study looked into the implemetation from \textcite{cadoNFS}.
 On the site, \textcite{cadoNFS} state that with their latest release of the program it takes a CPU time of 26 hours to factor RSA-120. RSA is an algorithm used in cryptography where the number stand for how many digits there are in the semiprime used in that algorithm.
 So RSA-120 uses a semiprime of 120 decimal digits. At the moment of writting the highest RSA that has been factored is RSA-250 and is factored in 2020 by Fabrice Boudot, Pierrick Gaudry, Aurore Guillevic, Nadia Heninger, Emmanuel Thomé, and Paul Zimmermann.
 The CAD)-NFS implementation takes 107 CPU hours to factor the RSA-130, 352 hours for RSA-140 and 83 days for RSA-155. From this can be concluded that the amount of CPU-time needed exponentially rises with the amout of digits in the number.
+These times are from experiments done by the developers of CADO-NFS themself. This study will do it's own testing.
+The test will be conducted on 3 different numbers: a number of 80, 100 and 120 digits long. The 120-digit number will use the RSA and cna be used to check if it corresponds with the time of the developers.
+The reuslts of this test can be found in \ref{tab:classicresults}.
+
+
+\begin{table}[]
+\label{tab:classicresults}
+    \begin{tabular}{|l|l|l|l|l|l|l|}
+    \hline
+    N                                                                                                                                                                                                       & Factors                                                                                                                                                                                               & T1(s)   & T2(s)   & T3(s)   & Average execution time(s) & Found \\ \hline
+    \begin{tabular}[c]{@{}l@{}}36408724,\\ 128576137\\ 325923953\\ 456178266\\ 890377635\\ 325683359\\ 465665127\\ 507825782\\ 650112231\end{tabular}                                                       & \begin{tabular}[c]{@{}l@{}}5992830235\\ 5241427583\\ 8685063377\\ 3258681119\\ x\\ 6075380529\\ 3454588601\\ 4457739870\\ 4761614649\end{tabular}                                                     &  &  &  &                                                &       \\ \hline
+    \begin{tabular}[c]{@{}l@{}}1\\ 522605027\\ 922533360\\ 535618378\\ 132637429\\ 718068114\\ 961380688\\ 657908494\\ 580122963\\ 258952897\\ 654000350\\ 692006139\end{tabular}                           & \begin{tabular}[c]{@{}l@{}}3797522793\\ 6943673922\\ 8088727554\\ 4562785456\\ 5536638199\\ ×\\ 4009469095\\ 0920881030\\ 6837352927\\ 6146838921\\ 4899724061\end{tabular}                           & 3031,87 & 2994,84 & 2982,96 & 3003,22                   & yes   \\ \hline
+    \begin{tabular}[c]{@{}l@{}}227\\ 010481295\\ 437363334\\ 259960947\\ 493668895\\ 875336466\\ 084780038\\ 173258247\\ 009162675\\ 779735389\\ 791151574\\ 049166747\\ 880487470\\ 296548479\end{tabular} & \begin{tabular}[c]{@{}l@{}}3274145556\\ 9349801575\\ 1146303749\\ 1414880636\\ 4240324017\\ 1463406883\\ ×\\ 6933426671\\ 1083018119\\ 7325401899\\ 7006413619\\ 6586312733\\ 6680673013\end{tabular} & 29404,6 &  &  &                                                &       \\ \hline
+    \end{tabular}
+\end{table}
 
 \subsection{Shor's algorithm}
 \subsubsection{How it works}
@@ -68,9 +87,9 @@ Line 17 executes the factoring for every number from the list in lines 14-15. He
 So when it is run for testing, the number will be executed one by one.
 The last line gives us the the 2 factors of the number.
 Every number is factored 3 times. This way we can see outliers in the execution time and can normailze them.
-The results of the algorithm can be found in table \ref{tab:results}. For the last 3 numbers no results were found. 
+The results of the algorithm can be found in table \ref{tab:quantumresults}. For the last 3 numbers no results were found. 
 From this a conclusion can be made. Eventhough there is an algorithm to efficiently factor number with a quantum computer, the technology is not quite there yet.
-The amount of qubit that cqn be worked with is not enough to do big calculation like factoring large numbers.
+The amount of qubit that can be worked with is not enough to do big calculation like factoring large numbers.
 
 \begin{lstlisting}
     01. from qiskit.algorithms import Shor
@@ -96,26 +115,26 @@ The amount of qubit that cqn be worked with is not enough to do big calculation 
 \end{lstlisting}
 
 \begin{table}[h]
-\label{tab:results}
+\label{tab:quantumresults}
     \caption{Result of running the algorithm on the numbers N}
     \begin{tabular}{|l|l|l|l|l|l|l|}
     \hline
-    N   & Factors   & T1(s) & T2(s) & T3(s) & Average execution time (s)        & Found              \\ \hline
-    15  & 3 and 5   & 37,1  & 37,3  & 35,9  & 36,8                              & yes                \\
-    21  & 3 and 7   & 19,5  & 22,9  & 16,9  & 19,8                              & yes                \\
-    33  & 3 and 11  & 38,5  & 32,7  & 30,9  & 34,0                              & no                 \\
-    35  & 5 and 7   & 26,4  & 27,1  & 36,3  & 29,9                              & yes                \\
-    39  & 3 and 13  & 33,3  & 36,1  & 32,2  & 33,9                              & yes                \\
-    51  & 3 and 17  & 30,7  & 30,9  & 30,1  & 30,6                              & yes                \\
-    55  & 5 and 11  & 29,5  & 31,2  & 32,9  & 31,2                              & yes                \\
-    65  & 5 and 13  & 84    & 82    & 80    & 82                                & yes                \\
-    77  & 7 and 11  & 75    & 73    & 76    & 75                                & yes                \\
-    85  & 5 and 17  & 79    & 90    & 75    & 81                                & yes                \\
-    91  & 7 and 13  & 80    & 75    & 76    & 77                                & yes                \\
-    119 & 7 and 17  & 71    & 73    & 76    & 73                                & yes                \\
-    143 & 11 and 13 & /     & /     & /     & No result after 10 minutes        & No                 \\
-    187 & 11 and 17 & /     & /     & /     & No result after 10 minutes        & No                 \\
-    221 & 13 and 17 & /     & /     & /     & No result after 10 minutes        & No                 \\ \hline
+    N   & Factors   & T1(s) & T2(s) & T3(s) & Average execution time(s)       & Found              \\ \hline
+    15  & 3 x 5   & 37,1  & 37,3  & 35,9  & 36,8                              & yes                \\
+    21  & 3 x 7   & 19,5  & 22,9  & 16,9  & 19,8                              & yes                \\
+    33  & 3 x 11  & 38,5  & 32,7  & 30,9  & 34,0                              & no                 \\
+    35  & 5 x 7   & 26,4  & 27,1  & 36,3  & 29,9                              & yes                \\
+    39  & 3 x 13  & 33,3  & 36,1  & 32,2  & 33,9                              & yes                \\
+    51  & 3 x 17  & 30,7  & 30,9  & 30,1  & 30,6                              & yes                \\
+    55  & 5 x 11  & 29,5  & 31,2  & 32,9  & 31,2                              & yes                \\
+    65  & 5 x 13  & 84    & 82    & 80    & 82                                & yes                \\
+    77  & 7 x 11  & 75    & 73    & 76    & 75                                & yes                \\
+    85  & 5 x 17  & 79    & 90    & 75    & 81                                & yes                \\
+    91  & 7 x 13  & 80    & 75    & 76    & 77                                & yes                \\
+    119 & 7 x 17  & 71    & 73    & 76    & 73                                & yes                \\
+    143 & 11 x 13 & /     & /     & /     & No result after 10 minutes        & No                 \\
+    187 & 11 x 17 & /     & /     & /     & No result after 10 minutes        & No                 \\
+    221 & 13 x 17 & /     & /     & /     & No result after 10 minutes        & No                 \\ \hline
     \end{tabular}
 \end{table}
 
@@ -131,5 +150,5 @@ With the Variational Quantum Eigensolver the minimum eigenvalue of a matrix can 
 
 Quantum computing is also getting used in machine learning. It can help by executing difficult and long calculations to optimise classical machine learning algorithms or it machine learning is used to improve the quantum algorithms \autocite{qml}.
 
-Algorithms to model quantum systems on a quantum computer are already being written. This could speedup and make the simulations more realistic than a classical computer could do \autocite{simulation}.
+Algorithms to model quantum systems on a quantum computer are already being written. This could speedup and make the simulations more realistic than a classical computer could do \autocite{simulations}.
 If there are realistic models of quantum systems researchers can look at the impact of different conditions on the system in a safe way. 

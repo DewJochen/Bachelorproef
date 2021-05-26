@@ -7,8 +7,8 @@
 
 
 
-In this study there will be a comparison between the GNFS algorithm on a classical computer and Shor's algorithm on a quantum computer.
-Section \ref{sec:Fields of use} will discuss some other algorithms that can show the benefits of quantum computing in the industry.
+In this study a comparison is made between the GNFS algorithm on a classical computer and Shor's algorithm on a quantum computer.
+Section \ref{sec:Fields of use} will discuss some other algorithms that can show real benefits of quantum computing in the industry.
 \section{The comparison}
 
 To compare both algorithms a list of numbers will be used that both should factor. Each number will be factored 3 times and the time needed will be captured. Then the average of the 3 factorazations will be calculated and used for comparison.
@@ -43,12 +43,12 @@ The reuslts of this test can be found in \ref{tab:classicresults}.
 
 \begin{table}[]
 \label{tab:classicresults}
+    \caption{Results of NFS for number N}
     \begin{tabular}{|l|l|l|l|l|l|l|}
     \hline
     N                                                                                                                                                                                                       & Factors                                                                                                                                                                                               & T1(s)   & T2(s)   & T3(s)   & Average execution time(s) & Found \\ \hline
-    \begin{tabular}[c]{@{}l@{}}36408724,\\ 128576137\\ 325923953\\ 456178266\\ 890377635\\ 325683359\\ 465665127\\ 507825782\\ 650112231\end{tabular}                                                       & \begin{tabular}[c]{@{}l@{}}5992830235\\ 5241427583\\ 8685063377\\ 3258681119\\ x\\ 6075380529\\ 3454588601\\ 4457739870\\ 4761614649\end{tabular}                                                     &  &  &  &                                                &       \\ \hline
     \begin{tabular}[c]{@{}l@{}}1\\ 522605027\\ 922533360\\ 535618378\\ 132637429\\ 718068114\\ 961380688\\ 657908494\\ 580122963\\ 258952897\\ 654000350\\ 692006139\end{tabular}                           & \begin{tabular}[c]{@{}l@{}}3797522793\\ 6943673922\\ 8088727554\\ 4562785456\\ 5536638199\\ ×\\ 4009469095\\ 0920881030\\ 6837352927\\ 6146838921\\ 4899724061\end{tabular}                           & 3031,87 & 2994,84 & 2982,96 & 3003,22                   & yes   \\ \hline
-    \begin{tabular}[c]{@{}l@{}}227\\ 010481295\\ 437363334\\ 259960947\\ 493668895\\ 875336466\\ 084780038\\ 173258247\\ 009162675\\ 779735389\\ 791151574\\ 049166747\\ 880487470\\ 296548479\end{tabular} & \begin{tabular}[c]{@{}l@{}}3274145556\\ 9349801575\\ 1146303749\\ 1414880636\\ 4240324017\\ 1463406883\\ ×\\ 6933426671\\ 1083018119\\ 7325401899\\ 7006413619\\ 6586312733\\ 6680673013\end{tabular} & 29404,6 &  &  &                                                &       \\ \hline
+    \begin{tabular}[c]{@{}l@{}}227\\ 010481295\\ 437363334\\ 259960947\\ 493668895\\ 875336466\\ 084780038\\ 173258247\\ 009162675\\ 779735389\\ 791151574\\ 049166747\\ 880487470\\ 296548479\end{tabular} & \begin{tabular}[c]{@{}l@{}}3274145556\\ 9349801575\\ 1146303749\\ 1414880636\\ 4240324017\\ 1463406883\\ ×\\ 6933426671\\ 1083018119\\ 7325401899\\ 7006413619\\ 6586312733\\ 6680673013\end{tabular} & 29404,6 & 29396,4 & 29402,7 & 29401,2                   & yes   \\ \hline
     \end{tabular}
 \end{table}
 
@@ -116,7 +116,7 @@ The amount of qubit that can be worked with is not enough to do big calculation 
 
 \begin{table}[h]
 \label{tab:quantumresults}
-    \caption{Result of running the algorithm on the numbers N}
+    \caption{Results of Shor's algorithm for number N}
     \begin{tabular}{|l|l|l|l|l|l|l|}
     \hline
     N   & Factors   & T1(s) & T2(s) & T3(s) & Average execution time(s)       & Found              \\ \hline

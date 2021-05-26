@@ -35,7 +35,7 @@ Without going deeper into them, these are the steps of the number field sieve al
 This study looked into the implemetation from \textcite{cadoNFS}.
 On the site, \textcite{cadoNFS} state that with their latest release of the program it takes a CPU time of 26 hours to factor RSA-120. RSA is an algorithm used in cryptography where the number stand for how many digits there are in the semiprime used in that algorithm.
 So RSA-120 uses a semiprime of 120 decimal digits. At the moment of writting the highest RSA that has been factored is RSA-250 and is factored in 2020 by Fabrice Boudot, Pierrick Gaudry, Aurore Guillevic, Nadia Heninger, Emmanuel Thomé, and Paul Zimmermann.
-The CAD)-NFS implementation takes 107 CPU hours to factor the RSA-130, 352 hours for RSA-140 and 83 days for RSA-155. From this can be concluded that the amount of CPU-time needed exponentially rises with the amout of digits in the number.
+The CADO-NFS implementation takes 107 CPU hours to factor the RSA-130, 352 hours for RSA-140 and 83 days for RSA-155. From this can be concluded that the amount of CPU-time needed exponentially rises with the amout of digits in the number.
 These times are from experiments done by the developers of CADO-NFS themself. This study will do it's own testing.
 The test will be conducted on 3 different numbers: a number of 80, 100 and 120 digits long. The 120-digit number will use the RSA and cna be used to check if it corresponds with the time of the developers.
 The reuslts of this test can be found in \ref{tab:classicresults}.
@@ -43,14 +43,19 @@ The reuslts of this test can be found in \ref{tab:classicresults}.
 
 \begin{table}[]
 \label{tab:classicresults}
-    \caption{Results of NFS for number N}
+    \caption{Results of NFS on number N}
     \begin{tabular}{|l|l|l|l|l|l|l|}
     \hline
     N                                                                                                                                                                                                       & Factors                                                                                                                                                                                               & T1(s)   & T2(s)   & T3(s)   & Average execution time(s) & Found \\ \hline
+    \begin{tabular}[c]{@{}l@{}}36408724\\ 128576137\\ 325923953\\ 456178266\\ 890377635\\ 325683359\\ 465665127\\ 507825782\\ 650112231\end{tabular}                                                       & \begin{tabular}[c]{@{}l@{}}5992830235\\ 5241427583\\ 8685063377\\ 3258681119\\ x\\ 6075380529\\ 3454588601\\ 4457739870\\ 4761614649\end{tabular}                                                      & 217,68  & 215,86  & 217,67  & 217,07                    & yes   \\ \hline
     \begin{tabular}[c]{@{}l@{}}1\\ 522605027\\ 922533360\\ 535618378\\ 132637429\\ 718068114\\ 961380688\\ 657908494\\ 580122963\\ 258952897\\ 654000350\\ 692006139\end{tabular}                           & \begin{tabular}[c]{@{}l@{}}3797522793\\ 6943673922\\ 8088727554\\ 4562785456\\ 5536638199\\ ×\\ 4009469095\\ 0920881030\\ 6837352927\\ 6146838921\\ 4899724061\end{tabular}                           & 3031,87 & 2994,84 & 2982,96 & 3003,22                   & yes   \\ \hline
     \begin{tabular}[c]{@{}l@{}}227\\ 010481295\\ 437363334\\ 259960947\\ 493668895\\ 875336466\\ 084780038\\ 173258247\\ 009162675\\ 779735389\\ 791151574\\ 049166747\\ 880487470\\ 296548479\end{tabular} & \begin{tabular}[c]{@{}l@{}}3274145556\\ 9349801575\\ 1146303749\\ 1414880636\\ 4240324017\\ 1463406883\\ ×\\ 6933426671\\ 1083018119\\ 7325401899\\ 7006413619\\ 6586312733\\ 6680673013\end{tabular} & 29404,6 & 29396,4 & 29402,7 & 29401,2                   & yes   \\ \hline
     \end{tabular}
 \end{table}
+
+The results in table \ref{tab:classicresults} show that the time indeed increases exponentially with the amount of digits in the number. The results from the factoring of RSA-120 show that the CPU on which the algorithm is run also has a big effect on the execution time.
+The developers used a dual 8-Core, 2.0Ghz Intel Xeon CPU and became a result of 26 hours. This study used a 6-core, 4.2Ghz AMD Ryzen 5 processor and has significant lower times. Since the clockspeed of the CPU is twice as big, the algorithm can be run twice as fast.
+
 
 \subsection{Shor's algorithm}
 \subsubsection{How it works}
@@ -116,7 +121,7 @@ The amount of qubit that can be worked with is not enough to do big calculation 
 
 \begin{table}[h]
 \label{tab:quantumresults}
-    \caption{Results of Shor's algorithm for number N}
+    \caption{Results of Shor's algorithm on number N}
     \begin{tabular}{|l|l|l|l|l|l|l|}
     \hline
     N   & Factors   & T1(s) & T2(s) & T3(s) & Average execution time(s)       & Found              \\ \hline
@@ -140,7 +145,7 @@ The amount of qubit that can be worked with is not enough to do big calculation 
 
 \section{Fields of use}
 \label{sec:Fields of use}
-Another greatly knwo algorithm is \textcite{grover}'s algorithm.
+Another widely used algorithm is \textcite{grover}'s algorithm.
 This algorithm is the quantum equivalent of an unstructered search and can even be used in other algorithm's to speed them up,this is called 'the amplitude amplification trick'.
 Companies wig big datacenters with lots of unstructered databases could really benefit from this. Say the database is N entries long. A normal search would have to look, on average, at half of the entries to find the one that's needed.
 If Grover's algorithm is used the amount can be reduced to $\sqrt{N}$, which is an significant improvement \autocite{qiskitgrover}.
